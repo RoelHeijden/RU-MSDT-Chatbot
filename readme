@@ -1,0 +1,36 @@
+- This file contains a short installation and running guide, For more information, look at the step_by_step_plan inside the documentation folder.
+
+
+
+INSTALLATION
+-----------------
+Make sure you use python 3.8, 3.7 or 3.6. Other versions are not guarenteed to work!
+
+QUICK INSTALL
+1) download the chatbot files from git
+2) with the commandline navigate to the "back-end" folder iniside "team2021-watson" or open a cmd inside the "back-end" folder inside "team2021-watson" folder
+3) run the command: python setup.py
+- This will create a batch file inside the "team2021-watson" folder and a shortcut on your desktop
+
+LONG INSTALL
+1) download the chatbot files from git
+2) with the commandline navigate to the "back-end" folder iniside "team2021-watson" or open a cmd inside the "back-end" folder inside "team2021-watson" folder.
+3) run pip install -r requirements.txt in the commandline
+4) if pytorch doesn't install correctly do:
+pip install torch===1.7.0 torchvision===0.8.1 torchaudio===0.7.0 -f https://download.pytorch.org/whl/torch_stable.html
+if you don't have windows or it doesn't work you can find the installation instructions for pytorch here:
+https://pytorch.org/
+
+
+RUNNING
+-------------------------
+QUICK RUN
+1) Make sure setup.py has been executed before using the QUICK INSTALL instructions
+2) Open "runChatbot" on your desktop or inside the "team2021-watson" folder.
+
+LONG RUN
+1) open the back-end folder inside the team2021-watson folder with  your IDE of choice
+2) run the file runChatbot.py to open the front-end and the local server at the same time
+- run chatbotLocalServer inside the "server" folder to only run the local server
+- run index.html inside the "front-end" folder inside the team2021-watson folder to only run the front-end
+3) A message will show indicating that the local server is running and the chat window will open in a new browser tab.

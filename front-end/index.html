@@ -1,0 +1,228 @@
+<!--
+ Copyright (c) 2021, Sanne Janssen, Hilde Kerkhoven,
+ Savannah Hazeleger, Roel van der Heijden, Thijmen van Buuren, Lars Boere, Lisa Hensens.
+ All rights reserved.
+
+ This source code is licensed under the BSD-style license found in the
+ LICENSE file in the root directory of this source tree.
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- link used stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  <!-- <link rel="stylesheet" href="{{ url_for('static', filename="css/style.css") }}"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+  <!--Button used to open chat window -->
+  <button class="chat-button" onclick="showChat()" id="chatBtn">
+    Chat with our chatbot
+  </button>
+
+  <!-- The chat window -->
+  <div class="chat-window" id="chatWdw">
+    <!-- The chat window header -->
+    <div class="chat-header">
+
+      <!-- Chat header left -->
+      <div class="chat-header-left">
+        <!-- Drop-down menu -->
+        <div class="drop-down-menu" id="ddm">
+          <!-- Button used to open drop-down menu -->
+          <button class="drop-button"  id="dropbutton" onclick="dropDownMenu()" title="Extra options">
+            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+          </button>
+          <!-- Content of the drop-down menu -->
+          <div class="drop-down-content" id="dropmenu" >
+            <a href="javascript:openFaqScreen()">FAQ</a>
+            <a href="javascript:openLanguage()"> Change language</a>
+            <a href="javascript:openHelpOption()"> Help </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat header center -->
+      <div class="chat-header-center">
+        <!-- Chatbot info -->
+        <div class="chat-header-img">
+          <img src="img/chatbot-avatar.jpg">
+          <i class="fa fa-circle"> </i>
+        </div>
+        <div class="chat-header-bot-info">
+          <h5> &nbsp; Sam </h5>
+        </div>
+      </div>
+
+      <!-- Chat header right -->
+      <div class="chat-header-right">
+        <!-- Button used to close chat window -->
+        <button class="close-button" onclick="hideChat()" title="Minimises the window">
+          <i class="fa fa-minus" aria-hidden="true"></i>
+        </button>
+        <!-- Button used to reset and end chat -->
+        <button class="reset-button" onclick="resetChat()" title="Ends this session">
+          <i class="fa fa-close" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <!--The name-input screen -->
+    <div class="name-screen" id="nameScrn">
+      <div class="instruction-msg">
+        <span>There are no employees of the library available at this moment.
+          Nonetheless, our Library Bot is ready to help you out with your inquiries in the mean time.
+          <br><br>To start a chat, type in your name and click on the <b>Start chat</b> button.</span>
+      </div>
+      <textarea class="name-box" placeholder="Type your name.." id="namebox" wrap="off" maxlength="50" required="true"></textarea>
+      <button class="start-chat-button" onclick="startChat()">Start chat</button>
+    </div>
+
+    <!-- The conversational box -->
+    <div class="chat-flow" id="chatFlw">
+    </div>
+
+    <!-- The part where the user can type their question -->
+    <div class="chat-input" id="chatInpt">
+      <textarea class="input-box" placeholder="Type message.." id="inputbox"></textarea>
+      <button class="send-button">
+        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <!-- The Terms of Service modal -->
+    <div class="modal" id="TermsOfServices">
+      <!-- Terms of Service content -->
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h1> Terms of Service Ask Your Librarian </h1>
+        <ul type="disc">
+          <li>
+            <h3> Ask Your Librarian </h3>
+            <p> is the digital information point of the University Library Nijmegen.
+              You can go there with questions, wishes, comments and complaints about
+              the collections and the services of all branches of the ULN. </p>
+          </li>
+          <li>
+            <h3> Personal Information </h3>
+            <p> is used exclusively to answer your question, for privacy reasons.
+              See also the <a style="font-weight: bold" href="https://www.ru.nl/library/library/about-library/privacy-statement/" target="_blank">privacy statement</a> of the University Library. </p>
+          </li>
+          <li>
+            <h3> Response time </h3>
+            <p> on working days you will receive an answer within 24 hours via
+              the e-mail address you provided. </p>
+          </li>
+        </ul>
+        <h2> Disclaimer </h2>
+        <p> <b> University Library Nijmegen accepts no liability for errors or
+            inaccuracies in references to information sources or for damage resulting
+            from consultation thereof. </b> </p>
+      </div>
+    </div>
+
+    <!-- Drop down modals -->
+    <!-- FAQ screen -->
+    <div id="faqScreen" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h1>Frequently Asked Questions</h1>
+        <h3>Q: What should I do when I am looking for a book?</h3>
+        <p>A: To find a book/journal you can make use of <a href="https://ru.on.worldcat.org/discovery?lang=en">this</a> link, which is the online database used by the Radboud University for study materials.
+          If you want more information about how to use RU Quest, you can find the helpguide using <a href="https://libguides.ru.nl/ruquestEN">this</a>.</p>
+
+        <h3>Q: How can I borrow a book and for how long?</h3>
+        <p>A: All information about borrowing and/or reservations of publications, loan period and pick up times you can find <a href="https://www.ru.nl/library/services/borrowing/">here</a>.</p>
+
+        <h3>Q: Can you still borrow a book if you are not a RU student?</h3>
+        <p>A: It is possible to use the library even if you are not a student at the Radboud University. More information about this can be found <a href="https://www.ru.nl/library/services/support/frequently-asked-questions/faq-answers/can-guests-use-digital-library/">here</a>.</p>
+
+        <h3>Q: Is it possible to study in the library?</h3>
+        <p>A: If you are a student of the Radboud University, you can book a workspace directly using <a href="https://face.ru.nl/">this</a>. If you are not, or you want more information about rules for reserving a workspace, you can use <a href="https://www.ru.nl/library/services/study/reservation-study/">this</a>.</p>
+
+        <h3>Q: Can I access the library's databases off-campus?</h3>
+        <p>A: A possible workaround to access the databases off-campus is to install the eduVPN. You can find more information <a href="https://www.ru.nl/ict-uk/students/studying-off-campus-vpn-ru-connect/vpn/">here</a>. </p>
+
+        <h3>Q: What are the opening hours of the Central Library?</h3>
+        <p>A: The Central Library is open on weekdays from 08:30 AM till 6:00 PM. On saturdays and sundays the Central Library is open from 10:00 AM till 6:00 PM.
+            If you want to know more about the Central Library, click on <a href="https://www.ru.nl/library/library/library-locations/central-library/choice/locations-central-library/">this</a>.</p>
+      </div>
+    </div>
+
+    <!-- Change language preference -->
+    <div id="ChangeLanguage" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h1>Change language of chatbot</h1>
+        <p>Choose the language in which you want to chat.</p>
+        <form method="post" id="changelan" action="">
+          <select id="langs" name="langs">
+            <option value="English" selected>English</option>
+            <option value="Dutch"> Dutch </option>
+          </select>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+
+    <!-- Help screen -->
+    <div id="helpInfo" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <!-- Instead of this chatbot in title, include the name of the chatbot -->
+        <h1>Help: how to use this chatbot</h1>
+        <p>To make use of this chatbot optimally, there are a few things you can do.</p>
+        <ul type="disc">
+          <li>
+            <p>If you have a question, click on one of the presented questions or just type your question.</p>
+          </li>
+          <li>
+            <p>Use the "Yes" and "No" buttons to provide feedback about the chatbot. This will help improving
+              the replies of the chatbot.</p>
+          </li>
+          <li>
+            <p>If the chatbot cannot answer your question correctly, you can press the "No" button in the
+              response of the chatbot that states "Have I answered your question?" after it has tried to
+              answer your question. Then the chatbot will ask several questions, such as your surname
+              and your emailaddress that are needed to make sure that you will get a response to your
+              own emailaddress.</p>
+          </li>
+          <li>
+            <p>If you like to converse in another language, such as Dutch, you can select the "Change
+              Language" option in the menu presented to the right of the name of the chatbot. Here you
+              can select your prefered language. If the chatbot understands the selected language, it
+              will start a new chat in this language. If it does not know the language, then it will inform
+              you on that and ask if you do not mind to chat with the chatbot in English.</p>
+          </li>
+          <li>
+            <p>To access this help screen, you can simply send "help" to the chatbot and it will give a short
+              summary of this page and a button that will sent you to this help page.</p>
+          </li>
+      </div>
+    </div>
+
+</div>
+  <!-- Import scripts -->
+  <script src="https://kit.fontawesome.com/276bbc96fc.js" crossorigin="anonymous"></script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="JavaScript/attachment.js"></script>
+  <script type="text/javascript" src="JavaScript/AYL.js"></script>
+  <script type="text/javascript" src="Javascript/menu.js"></script>
+  <script type="text/javascript" src="JavaScript/FAQ.js"></script>
+  <script type="text/javascript" src="JavaScript/feedback.js"></script>
+  <script type="text/javascript" src="JavaScript/message.js"></script>
+  <script type="text/javascript" src="JavaScript/server.js"></script>
+  <script type="text/javascript" src="JavaScript/SmtpJS.js"></script>
+
+</body>
+
+</html>

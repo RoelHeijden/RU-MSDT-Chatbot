@@ -1,0 +1,13 @@
+pandas>=0.23.4
+Flask_Cors>=3.0.9
+Flask>=1.0.2
+numpy>=1.16.4
+spellchecker>=0.4
+pyspellchecker
+nltk>=3.5
+language-detector
+matplotlib
+winshell
+pywin32
+pypiwin32
+torch
